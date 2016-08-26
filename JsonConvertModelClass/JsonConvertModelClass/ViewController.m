@@ -16,7 +16,6 @@
 @property (strong, nonatomic) NSArray   *systemKeywords;
 @property (weak) IBOutlet NSButton      *generateButton;
 @property (weak) IBOutlet NSTextField   *classNameTextField;
-@property (weak) IBOutlet NSTextField   *systemKeywordsTextField;
 @property (unsafe_unretained) IBOutlet  NSTextView *textView;
 
 /**
@@ -102,7 +101,7 @@
         NSString *name = [NSString stringWithFormat:@"%@DetailModel", [className capitalizedString]];
         [self generateClassWithClassName:className data:[obj firstObject]];
         [self importHaderFileToClassWithHFile:hFile inportString:[name stringByAppendingString:@".h"]];
-        property = [NSString stringWithFormat:@"@property (copy, nonatomic) NSArray *%@;\n", name];
+        property = [NSString stringWithFormat:@"@property (strong, nonatomic) NSArray *arr_%@;\n", name];
         
         [properties appendString:property];
     }
