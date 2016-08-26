@@ -12,6 +12,8 @@
 		EBEA07531D704BBB00E09701 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBEA07521D704BBB00E09701 /* ViewController.m */; };
 		EBEA07551D704BBB00E09701 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBEA07541D704BBB00E09701 /* Assets.xcassets */; };
 		EBEA07581D704BBB00E09701 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBEA07561D704BBB00E09701 /* Main.storyboard */; };
+		EBEA07631D704CA300E09701 /* HFile.wit in Resources */ = {isa = PBXBuildFile; fileRef = EBEA075F1D704CA300E09701 /* HFile.wit */; };
+		EBEA07641D704CA300E09701 /* MFile.wit in Resources */ = {isa = PBXBuildFile; fileRef = EBEA07601D704CA300E09701 /* MFile.wit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		EBEA07541D704BBB00E09701 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EBEA07571D704BBB00E09701 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EBEA07591D704BBB00E09701 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EBEA075F1D704CA300E09701 /* HFile.wit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HFile.wit; sourceTree = "<group>"; };
+		EBEA07601D704CA300E09701 /* MFile.wit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MFile.wit; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +75,8 @@
 		EBEA074E1D704BBB00E09701 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EBEA075F1D704CA300E09701 /* HFile.wit */,
+				EBEA07601D704CA300E09701 /* MFile.wit */,
 				EBEA074F1D704BBB00E09701 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -134,7 +140,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBEA07551D704BBB00E09701 /* Assets.xcassets in Resources */,
+				EBEA07631D704CA300E09701 /* HFile.wit in Resources */,
 				EBEA07581D704BBB00E09701 /* Main.storyboard in Resources */,
+				EBEA07641D704CA300E09701 /* MFile.wit in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +297,7 @@
 				EBEA075E1D704BBB00E09701 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

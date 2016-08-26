@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6198" systemVersion="14A297b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6198"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -10,11 +11,11 @@
                 <application id="hnw-xV-0zn" sceneMemberID="viewController">
                     <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
                         <items>
-                            <menuItem title="JsonConvertModelClass" id="1Xt-HY-uBw">
+                            <menuItem title="JsonToClass" id="1Xt-HY-uBw">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="JsonConvertModelClass" systemMenu="apple" id="uQy-DD-JDr">
+                                <menu key="submenu" title="JsonToClass" systemMenu="apple" id="uQy-DD-JDr">
                                     <items>
-                                        <menuItem title="About JsonConvertModelClass" id="5kV-Vb-QxS">
+                                        <menuItem title="About JsonToClass" id="5kV-Vb-QxS">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
@@ -28,7 +29,7 @@
                                             <menu key="submenu" title="Services" systemMenu="services" id="hz9-B4-Xy5"/>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
-                                        <menuItem title="Hide JsonConvertModelClass" keyEquivalent="h" id="Olw-nP-bQN">
+                                        <menuItem title="Hide JsonToClass" keyEquivalent="h" id="Olw-nP-bQN">
                                             <connections>
                                                 <action selector="hide:" target="Ady-hI-5gd" id="PnN-Uc-m68"/>
                                             </connections>
@@ -46,7 +47,7 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
-                                        <menuItem title="Quit JsonConvertModelClass" keyEquivalent="q" id="4sb-4s-VLi">
+                                        <menuItem title="Quit JsonToClass" keyEquivalent="q" id="4sb-4s-VLi">
                                             <connections>
                                                 <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
                                             </connections>
@@ -627,7 +628,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                                     <items>
-                                        <menuItem title="JsonConvertModelClass Help" keyEquivalent="?" id="FKE-Sm-Kum">
+                                        <menuItem title="JsonToClass Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                             <connections>
                                                 <action selector="showHelp:" target="Ady-hI-5gd" id="y7X-2Q-9no"/>
                                             </connections>
@@ -641,12 +642,12 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider=""/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
-        <!--Window Controller - Window-->
+        <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
@@ -667,15 +668,106 @@
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="596" height="482"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SPa-Gg-qr8">
+                                <rect key="frame" x="28" y="434" width="102" height="18"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Class Name：" id="c20-0a-4yL">
+                                    <font key="font" size="15" name=".HelveticaNeueDeskInterface-Regular"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y0E-Zt-9Bb">
+                                <rect key="frame" x="28" y="378" width="41" height="18"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Json:" id="ILa-DP-ohD">
+                                    <font key="font" size="15" name=".HelveticaNeueDeskInterface-Regular"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2qm-7M-WzD">
+                                <rect key="frame" x="30" y="404" width="536" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="0KN-GM-SPK"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="mme-vx-bfM">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="b90-Wu-vzd">
+                                <rect key="frame" x="28" y="27" width="540" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="j5c-gy-5QX"/>
+                                </constraints>
+                                <buttonCell key="cell" type="bevel" title=" Generating" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mjg-lK-lWc">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="generateButtonOnClicked:" target="XfG-lQ-9wD" id="1zj-Ee-UjX"/>
+                                </connections>
+                            </button>
+                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WgG-vZ-dEg">
+                                <rect key="frame" x="30" y="85" width="536" height="285"/>
+                                <clipView key="contentView" id="NPY-Tl-WFb">
+                                    <rect key="frame" x="1" y="1" width="534" height="283"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="Sus-Qt-MIg">
+                                            <rect key="frame" x="0.0" y="0.0" width="534" height="283"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <size key="minSize" width="534" height="283"/>
+                                            <size key="maxSize" width="536" height="10000000"/>
+                                            <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <size key="minSize" width="534" height="283"/>
+                                            <size key="maxSize" width="536" height="10000000"/>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="Y1W-jq-xED">
+                                    <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="sB9-Rf-Mrc">
+                                    <rect key="frame" x="519" y="1" width="16" height="283"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="b90-Wu-vzd" secondAttribute="trailing" constant="30" id="3ey-TW-y0m"/>
+                            <constraint firstItem="SPa-Gg-qr8" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="30" id="525-hj-7XA"/>
+                            <constraint firstAttribute="bottom" secondItem="b90-Wu-vzd" secondAttribute="bottom" constant="30" id="87o-Fn-XPC"/>
+                            <constraint firstItem="WgG-vZ-dEg" firstAttribute="top" secondItem="y0E-Zt-9Bb" secondAttribute="bottom" constant="8" id="CKo-y6-us5"/>
+                            <constraint firstItem="y0E-Zt-9Bb" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="30" id="CwM-Zm-Ks2"/>
+                            <constraint firstItem="y0E-Zt-9Bb" firstAttribute="top" secondItem="2qm-7M-WzD" secondAttribute="bottom" constant="8" id="HB6-GI-2l8"/>
+                            <constraint firstAttribute="trailing" secondItem="2qm-7M-WzD" secondAttribute="trailing" constant="30" id="LF2-FC-PIH"/>
+                            <constraint firstItem="WgG-vZ-dEg" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="30" id="a7O-MY-Nr8"/>
+                            <constraint firstItem="SPa-Gg-qr8" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="30" id="cLM-v7-EFg"/>
+                            <constraint firstItem="b90-Wu-vzd" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="30" id="dJQ-QG-plm"/>
+                            <constraint firstAttribute="trailing" secondItem="WgG-vZ-dEg" secondAttribute="trailing" constant="30" id="ieG-h2-yPk"/>
+                            <constraint firstItem="2qm-7M-WzD" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="30" id="lY5-I4-xWO"/>
+                            <constraint firstItem="b90-Wu-vzd" firstAttribute="top" secondItem="WgG-vZ-dEg" secondAttribute="bottom" constant="15" id="nVX-GF-KXf"/>
+                            <constraint firstItem="2qm-7M-WzD" firstAttribute="top" secondItem="SPa-Gg-qr8" secondAttribute="bottom" constant="8" id="qFz-qK-ceB"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="classNameTextField" destination="2qm-7M-WzD" id="aH1-Ip-hBH"/>
+                        <outlet property="generateButton" destination="b90-Wu-vzd" id="11G-nO-XDa"/>
+                        <outlet property="textView" destination="Sus-Qt-MIg" id="UdO-s1-iCF"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="133" y="761"/>
         </scene>
     </scenes>
 </document>

@@ -1,0 +1,6 @@
+#import <Foundation/Foundation.h>
+
+@interface @ClassName@ : NSObject
+
+@property@
+@end
