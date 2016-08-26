@@ -1,0 +1,296 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EBEA074D1D704BBB00E09701 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EBEA074C1D704BBB00E09701 /* AppDelegate.m */; };
+		EBEA07501D704BBB00E09701 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EBEA074F1D704BBB00E09701 /* main.m */; };
+		EBEA07531D704BBB00E09701 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBEA07521D704BBB00E09701 /* ViewController.m */; };
+		EBEA07551D704BBB00E09701 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBEA07541D704BBB00E09701 /* Assets.xcassets */; };
+		EBEA07581D704BBB00E09701 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBEA07561D704BBB00E09701 /* Main.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		EBEA07481D704BBB00E09701 /* JsonConvertModelClass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JsonConvertModelClass.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBEA074B1D704BBB00E09701 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EBEA074C1D704BBB00E09701 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EBEA074F1D704BBB00E09701 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EBEA07511D704BBB00E09701 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		EBEA07521D704BBB00E09701 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		EBEA07541D704BBB00E09701 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EBEA07571D704BBB00E09701 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EBEA07591D704BBB00E09701 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EBEA07451D704BBB00E09701 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EBEA073F1D704BBB00E09701 = {
+			isa = PBXGroup;
+			children = (
+				EBEA074A1D704BBB00E09701 /* JsonConvertModelClass */,
+				EBEA07491D704BBB00E09701 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EBEA07491D704BBB00E09701 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EBEA07481D704BBB00E09701 /* JsonConvertModelClass.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EBEA074A1D704BBB00E09701 /* JsonConvertModelClass */ = {
+			isa = PBXGroup;
+			children = (
+				EBEA074B1D704BBB00E09701 /* AppDelegate.h */,
+				EBEA074C1D704BBB00E09701 /* AppDelegate.m */,
+				EBEA07511D704BBB00E09701 /* ViewController.h */,
+				EBEA07521D704BBB00E09701 /* ViewController.m */,
+				EBEA07541D704BBB00E09701 /* Assets.xcassets */,
+				EBEA07561D704BBB00E09701 /* Main.storyboard */,
+				EBEA07591D704BBB00E09701 /* Info.plist */,
+				EBEA074E1D704BBB00E09701 /* Supporting Files */,
+			);
+			path = JsonConvertModelClass;
+			sourceTree = "<group>";
+		};
+		EBEA074E1D704BBB00E09701 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EBEA074F1D704BBB00E09701 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EBEA07471D704BBB00E09701 /* JsonConvertModelClass */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EBEA075C1D704BBB00E09701 /* Build configuration list for PBXNativeTarget "JsonConvertModelClass" */;
+			buildPhases = (
+				EBEA07441D704BBB00E09701 /* Sources */,
+				EBEA07451D704BBB00E09701 /* Frameworks */,
+				EBEA07461D704BBB00E09701 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JsonConvertModelClass;
+			productName = JsonConvertModelClass;
+			productReference = EBEA07481D704BBB00E09701 /* JsonConvertModelClass.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EBEA07401D704BBB00E09701 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = Wit;
+				TargetAttributes = {
+					EBEA07471D704BBB00E09701 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = EBEA07431D704BBB00E09701 /* Build configuration list for PBXProject "JsonConvertModelClass" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EBEA073F1D704BBB00E09701;
+			productRefGroup = EBEA07491D704BBB00E09701 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EBEA07471D704BBB00E09701 /* JsonConvertModelClass */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EBEA07461D704BBB00E09701 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EBEA07551D704BBB00E09701 /* Assets.xcassets in Resources */,
+				EBEA07581D704BBB00E09701 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EBEA07441D704BBB00E09701 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EBEA07531D704BBB00E09701 /* ViewController.m in Sources */,
+				EBEA07501D704BBB00E09701 /* main.m in Sources */,
+				EBEA074D1D704BBB00E09701 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		EBEA07561D704BBB00E09701 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EBEA07571D704BBB00E09701 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EBEA075A1D704BBB00E09701 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		EBEA075B1D704BBB00E09701 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		EBEA075D1D704BBB00E09701 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = JsonConvertModelClass/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = blog.witchan.com.JsonConvertModelClass;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		EBEA075E1D704BBB00E09701 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = JsonConvertModelClass/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = blog.witchan.com.JsonConvertModelClass;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EBEA07431D704BBB00E09701 /* Build configuration list for PBXProject "JsonConvertModelClass" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EBEA075A1D704BBB00E09701 /* Debug */,
+				EBEA075B1D704BBB00E09701 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EBEA075C1D704BBB00E09701 /* Build configuration list for PBXNativeTarget "JsonConvertModelClass" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EBEA075D1D704BBB00E09701 /* Debug */,
+				EBEA075E1D704BBB00E09701 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EBEA07401D704BBB00E09701 /* Project object */;
+}
