@@ -62,8 +62,28 @@
 //    self.textView.string = [self.textView.string stringByReplacingOccurrencesOfString:@"，" withString:@","];
 //    self.textView.string = [self.textView.string stringByReplacingOccurrencesOfString:@"：" withString:@":"];
 
+//
+    
+//    /Users/MWeit/Documents/JsonConvertModelClass/JsonConvertModelClass/JsonConvertModelClass/ViewController.m:72:33: 'sendSynchronousRequest:returningResponse:error:' is deprecated: first deprecated in OS X 10.11 - Use [NSURLSession dataTaskWithRequest:completionHandler:] (see NSURLSession.h
     // 将json文字转换成字典
-    NSData *data = [self.textView.string dataUsingEncoding:NSUTF8StringEncoding];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", @"[a-zA-z]+://[^\\s]*"];
+    NSData *data;
+    if ([predicate evaluateWithObject:self.textView.string]) {
+        NSURL *url = [NSURL URLWithString:self.textView.string];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        #pragma clang diagnostic push
+        #pragma clang diagnostic ignored"-Wdeprecated-declarations"
+            data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+        #pragma clang diagnostic pop
+    } else {
+        data = [self.textView.string dataUsingEncoding:NSUTF8StringEncoding];
+    }
+    
+    if (data == nil || [NSJSONSerialization isValidJSONObject:data]) {
+        self.textView.string = @"json格式不正确";
+        return;
+    }
+    
     NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
     
     if (jsonDictionary == nil || error) {
