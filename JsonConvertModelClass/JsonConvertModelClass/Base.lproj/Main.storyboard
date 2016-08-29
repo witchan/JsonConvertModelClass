@@ -651,7 +651,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" title="官网: witchan.com" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -670,11 +670,11 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="596" height="482"/>
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="375"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SPa-Gg-qr8">
-                                <rect key="frame" x="28" y="434" width="102" height="18"/>
+                                <rect key="frame" x="28" y="327" width="102" height="18"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Class Name：" id="c20-0a-4yL">
                                     <font key="font" size="15" name=".HelveticaNeueDeskInterface-Regular"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -682,7 +682,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y0E-Zt-9Bb">
-                                <rect key="frame" x="28" y="378" width="81" height="18"/>
+                                <rect key="frame" x="28" y="271" width="81" height="18"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Json or url:" id="ILa-DP-ohD">
                                     <font key="font" size="15" name=".HelveticaNeueDeskInterface-Regular"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -690,7 +690,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2qm-7M-WzD">
-                                <rect key="frame" x="30" y="404" width="536" height="22"/>
+                                <rect key="frame" x="30" y="297" width="440" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="0KN-GM-SPK"/>
                                 </constraints>
@@ -701,7 +701,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="b90-Wu-vzd">
-                                <rect key="frame" x="28" y="27" width="540" height="45"/>
+                                <rect key="frame" x="28" y="27" width="444" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="j5c-gy-5QX"/>
                                 </constraints>
@@ -714,19 +714,19 @@
                                 </connections>
                             </button>
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WgG-vZ-dEg">
-                                <rect key="frame" x="30" y="85" width="536" height="285"/>
+                                <rect key="frame" x="30" y="85" width="440" height="178"/>
                                 <clipView key="contentView" id="NPY-Tl-WFb">
-                                    <rect key="frame" x="1" y="1" width="534" height="283"/>
+                                    <rect key="frame" x="1" y="1" width="438" height="176"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="Sus-Qt-MIg">
-                                            <rect key="frame" x="0.0" y="0.0" width="534" height="283"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="438" height="176"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="534" height="283"/>
+                                            <size key="minSize" width="438" height="176"/>
                                             <size key="maxSize" width="536" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="534" height="283"/>
+                                            <size key="minSize" width="438" height="176"/>
                                             <size key="maxSize" width="536" height="10000000"/>
                                         </textView>
                                     </subviews>
@@ -737,7 +737,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="sB9-Rf-Mrc">
-                                    <rect key="frame" x="519" y="1" width="16" height="283"/>
+                                    <rect key="frame" x="423" y="1" width="16" height="176"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
