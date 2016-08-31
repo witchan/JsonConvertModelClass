@@ -53,18 +53,10 @@
 
 - (IBAction)generateButtonOnClicked:(NSButton *)sender {
     
-    NSString *className = [self.classNameTextField.stringValue capitalizedString];
+    NSString *className = [@"WW" stringByAppendingString:[self.classNameTextField.stringValue capitalizedString]];
     
     NSError *error;
-//    
-//    self.textView.string = [self.textView.string stringByReplacingOccurrencesOfString:@"\\t" withString:@""];
-//    self.textView.string = [self.textView.string stringByReplacingOccurrencesOfString:@"\\r" withString:@""];
-//    self.textView.string = [self.textView.string stringByReplacingOccurrencesOfString:@"，" withString:@","];
-//    self.textView.string = [self.textView.string stringByReplacingOccurrencesOfString:@"：" withString:@":"];
-
-//
     
-//    /Users/MWeit/Documents/JsonConvertModelClass/JsonConvertModelClass/JsonConvertModelClass/ViewController.m:72:33: 'sendSynchronousRequest:returningResponse:error:' is deprecated: first deprecated in OS X 10.11 - Use [NSURLSession dataTaskWithRequest:completionHandler:] (see NSURLSession.h
     // 将json文字转换成字典
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", @"[a-zA-z]+://[^\\s]*"];
     NSData *data;
@@ -93,6 +85,7 @@
     
     // 生成class文件
     [self generateClassWithClassName:className data:jsonDictionary];
+    [self inportModelFile];
     
     self.textView.string = @"转换成功！文件已保存到桌面的Models文件夹中.";
 }
@@ -118,7 +111,7 @@
     NSString *property;
     
     if ([obj isKindOfClass:[NSArray class]]) {
-        NSString *name = [NSString stringWithFormat:@"%@DetailModel", [className capitalizedString]];
+        NSString *name = [NSString stringWithFormat:@"WW%@Model", [className capitalizedString]];
         [self generateClassWithClassName:className data:[obj firstObject]];
         [self importHaderFileToClassWithHFile:hFile inportString:[name stringByAppendingString:@".h"]];
         property = [NSString stringWithFormat:@"@property (strong, nonatomic) NSArray *arr_%@;\n", name];
@@ -135,23 +128,23 @@
                 property = [NSString stringWithFormat:@"@property (copy, nonatomic) NSString *str_%@;\n", key];
             } else if ([value isKindOfClass:[NSArray class]]) {
                 
-                NSString *name = [NSString stringWithFormat:@"%@Model", [key capitalizedString]];
+                NSString *name = [NSString stringWithFormat:@"WW%@Model", [key capitalizedString]];
                 [self generateClassWithClassName:name data:[value firstObject]];
                 [self importHaderFileToClassWithHFile:hFile inportString:[name stringByAppendingString:@".h"]];
                 
                 property = [NSString stringWithFormat:@"@property (strong, nonatomic) NSArray *arr_%@;\n", key];
             } else if ([value isKindOfClass:[NSDictionary class]]) {
-                NSString *name = [NSString stringWithFormat:@"%@Model", [key capitalizedString]];
+                NSString *name = [NSString stringWithFormat:@"WW%@Model", [key capitalizedString]];
                 
                 [self generateClassWithClassName:name data:value];
                 [self importHaderFileToClassWithHFile:hFile inportString:[name stringByAppendingString:@".h"]];
-                property = [NSString stringWithFormat:@"@property (strong, nonatomic) %@ *%@;\n", name, key];
+                property = [NSString stringWithFormat:@"@property (strong, nonatomic) %@ *%@Model;\n", name, key];
             } else if ([[value className] isEqualToString:@"__NSCFBoolean"]) {
                 property = [NSString stringWithFormat:@"@property (assign, nonatomic, getter=is%@) BOOL b_%@;\n", [[key copy] capitalizedString], key];
             } else if ([[value className] isEqualToString:@"__NSCFNumber"]) {
                 property = [NSString stringWithFormat:@"@property (copy, nonatomic) NSNumber *n_%@;\n", key];
             } else {
-                property = [NSString stringWithFormat:@"@property (strong, nonatomic) id %@;\n", key];
+                property = [NSString stringWithFormat:@"@property (strong, nonatomic) id id_%@;\n", key];
             }
             
             [properties appendString:property];
@@ -166,6 +159,7 @@
     NSString *hSavePath = [NSString stringWithFormat:@"%@/%@.h", savePath, className];
     NSString *mSavePath = [NSString stringWithFormat:@"%@/%@.m", savePath, className];
     
+    
     [[NSFileManager defaultManager] createDirectoryAtPath:savePath withIntermediateDirectories:NO attributes:nil error:nil];
 
     [hFile writeToFile:hSavePath atomically:NO encoding:NSUTF8StringEncoding error:nil];
@@ -175,7 +169,22 @@
 - (void)importHaderFileToClassWithHFile:(NSMutableString *)hFile inportString:(NSString *)text {
     NSString *importString = [NSString stringWithFormat:@"#import \"%@\"\n", text];
     
-    [hFile insertString:importString atIndex:35];
+    [hFile insertString:importString atIndex:63];
+}
+
+- (void)inportModelFile {
+    NSString *HWWModelPath  = [[NSBundle mainBundle] pathForResource:@"HWWModel" ofType:@"wit"];
+    NSString *MWWModelPath  = [[NSBundle mainBundle] pathForResource:@"MWWModel" ofType:@"wit"];
+    
+    NSString *HWWModel = [NSString stringWithContentsOfFile:HWWModelPath encoding:NSUTF8StringEncoding error:nil];
+    NSString *MWWModel = [NSString stringWithContentsOfFile:MWWModelPath encoding:NSUTF8StringEncoding error:nil];
+    
+    NSString *savePath = [[NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"Models/"];
+    NSString *hSavePath = [NSString stringWithFormat:@"%@/NSObject+WWModel.h", savePath];
+    NSString *mSavePath = [NSString stringWithFormat:@"%@/NSObject+WWModel.m", savePath];
+
+    [HWWModel writeToFile:hSavePath atomically:NO encoding:NSUTF8StringEncoding error:nil];
+    [MWWModel writeToFile:mSavePath atomically:NO encoding:NSUTF8StringEncoding error:nil];
 }
 
 @end
