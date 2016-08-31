@@ -8,126 +8,144 @@
 
 #import "NSObject+WWModel.h"
 #import <objc/runtime.h>
+#import <objc/message.h>
 
 static inline void swizzleSelector(Class theClass, SEL originalSelector, SEL swizzledSelector) {
-    Method originalMethod = class_getInstanceMethod(theClass, originalSelector);
-    Method swizzledMethod = class_getInstanceMethod(theClass, swizzledSelector);
-    method_exchangeImplementations(originalMethod, swizzledMethod);
+Method originalMethod = class_getInstanceMethod(theClass, originalSelector);
+Method swizzledMethod = class_getInstanceMethod(theClass, swizzledSelector);
+method_exchangeImplementations(originalMethod, swizzledMethod);
 }
 
 @implementation NSObject (WWModel)
 
 + (void)load {
-    swizzleSelector([NSObject class], @selector(initWithCoder:), @selector(swizzle_initWithCoder:));
-    swizzleSelector([NSObject class], @selector(encodeWithCoder:), @selector(swizzle_encodeWithCoder:));
+swizzleSelector([NSObject class], @selector(initWithCoder:), @selector(swizzle_initWithCoder:));
+swizzleSelector([NSObject class], @selector(encodeWithCoder:), @selector(swizzle_encodeWithCoder:));
 }
 
 #pragma mark - Public
 
 + (instancetype)modelWithDictionary:(NSDictionary *)dictionary {
-    id object = [[self alloc] init];
-    [object generateObject:object data:dictionary];
-    return object;
+id object = [[self alloc] init];
+[object generateObject:object data:dictionary];
+return object;
 }
 
 - (NSArray *)propertyList {
-    unsigned int propertyCount;
-    objc_property_t *propertyList = class_copyPropertyList([self class], &propertyCount);
+unsigned int propertyCount;
+objc_property_t *propertyList = class_copyPropertyList([self class], &propertyCount);
 
-    NSMutableArray *propertyNames = [NSMutableArray array];
+NSMutableArray *propertyNames = [NSMutableArray array];
 
-    for (int i=0; i<propertyCount; i++) {
-        objc_property_t property = propertyList[i];
-        NSString *name = [NSString stringWithUTF8String:property_getName(property)];
-        [propertyNames addObject:name];
-    }
-    return propertyNames;
+for (int i=0; i<propertyCount; i++) {
+objc_property_t property = propertyList[i];
+NSString *name = [NSString stringWithUTF8String:property_getName(property)];
+[propertyNames addObject:name];
+}
+return propertyNames;
 }
 
 
 #pragma mark - NSCoding
 
 - (nullable instancetype)swizzle_initWithCoder:(NSCoder *)aDecoder {
+if (!aDecoder) return self;
 
-    id obj = [self init];
+id obj = [self init];
 
-    for (NSString *name in [obj propertyList]) {
-        id value = [aDecoder decodeObjectForKey:name];
-        [obj setValue:value forKey:name];
-    }
-    return obj;
+for (NSString *name in [obj propertyList]) {
+id value = [aDecoder decodeObjectForKey:name];
+NSString *setMethodName = [NSString stringWithFormat:@"set%@:", [self formatterMethodName:name]];
+SEL sel = NSSelectorFromString(setMethodName);
+((void (*) (id, SEL, id))objc_msgSend)(obj, sel, value);
+}
+return obj;
 }
 
 
 - (void)swizzle_encodeWithCoder:(NSCoder *)aCoder {
-    for (NSString *name in [self propertyList]) {
-        [aCoder encodeObject:[self valueForKey:name] forKey:name];
-    }
+for (NSString *name in [self propertyList]) {
+//        [aCoder encodeObject:[self valueForKey:name] forKey:name];
+((void (*) (id, SEL, id, id))objc_msgSend)(aCoder, @selector(encodeObject:forKey:), [self valueForKey:name],name);
+}
 }
 
 
 #pragma mark - Private
 
+- (NSString *)formatterMethodName:(NSString *)name {
+
+NSString *hasName = [name substringToIndex:1].uppercaseString;
+NSString *methodName = [NSString stringWithFormat:@"%@%@", hasName, [name substringFromIndex:1]];
+return methodName;
+}
+
 - (NSString *)convertKeyWithValue:(id)value key:(NSString *)key {
 
-    NSString *className = NSStringFromClass([value class]);
+NSString *className = NSStringFromClass([value class]);
+NSString *hasName;
 
-    if ([value isKindOfClass:[NSString class]]) {
-        return [@"str_" stringByAppendingString:key];
-    } else if ([className isEqualToString:@"__NSCFArray"]) {
-        return [@"arr_" stringByAppendingString:key];
-    } else if ([className isEqualToString:@"__NSCFDictionary"]) {
-        return [key stringByAppendingString:@"Model"];
-    } else if ([className isEqualToString:@"__NSCFBoolean"]) {
-        return [@"b_" stringByAppendingString:key];
-    } else if ([className isEqualToString:@"__NSCFNumber"]) {
-        return [@"n_" stringByAppendingString:key];
-    } else {
-        return [@"id_" stringByAppendingString:key];
-    }
+if ([value isKindOfClass:[NSString class]]) {
+hasName = @"setStr_";
+} else if ([className isEqualToString:@"__NSCFArray"]) {
+hasName = @"setArr_";
+} else if ([className isEqualToString:@"__NSCFDictionary"]) {
+hasName = [NSString stringWithFormat:@"set%@", [self formatterMethodName:key]];
+return [hasName stringByAppendingString:@"Model:"];
+} else if ([className isEqualToString:@"__NSCFBoolean"]) {
+hasName = @"setB_";
+} else if ([className isEqualToString:@"__NSCFNumber"]) {
+hasName = @"setN_";
+} else {
+hasName = @"setId_";
+}
+return [NSString stringWithFormat:@"%@%@:", hasName, key];
 }
 
 - (void)generateObject:(id)object data:(id)data {
 
-    if ([data isKindOfClass:[NSDictionary class]]) {
+if ([data isKindOfClass:[NSDictionary class]]) {
 
-        for (NSString *tempKey in [data allKeys]) {
+for (NSString *tempKey in [data allKeys]) {
 
-            NSString *key = [self convertKeyWithValue:data[tempKey] key:tempKey];
+NSString *key = [self convertKeyWithValue:data[tempKey] key:tempKey];
 
-            objc_property_t property = class_getProperty([object class], [key UTF8String]);
-            if (!property) {
-                continue;
-            }
+SEL sel = NSSelectorFromString(key);
+Method method = class_getInstanceMethod([object class], sel);
 
-            id value = data[tempKey];
+if (!method) {
+continue;
+}
 
-            if ([value isKindOfClass:[NSArray class]]) {
+id value = data[tempKey];
 
-                NSMutableArray *subObjects = [NSMutableArray array];
-                NSString *className = [NSString stringWithFormat:@"WW%@Model", tempKey.capitalizedString];
+if ([value isKindOfClass:[NSArray class]]) {
 
-                for (int i=0; i<[value count]; i++) {
-                    id subObject = [[NSClassFromString(className) alloc] init];
-                    [self generateObject:subObject data:value[i]];
-                    [subObjects addObject:subObject];
-                }
+NSMutableArray *subObjects = [NSMutableArray array];
+NSString *className = [NSString stringWithFormat:@"WW%@Model", [self formatterMethodName:tempKey]];
 
-                [object setValue:subObjects forKey:key];
-            } else if ([value isKindOfClass:[NSDictionary class]]) {
-                NSString *className = [NSString stringWithFormat:@"WW%@Model", tempKey.capitalizedString];
-                id subObject = [[NSClassFromString(className) alloc] init];
-                [self generateObject:subObject data:value];
-                [object setValue:subObject forKey:key];
-            } else {
-                [object setValue:value forKey:key];
-            }
-        }
-    }
+for (int i=0; i<[value count]; i++) {
+id subObject = [[NSClassFromString(className) alloc] init];
+[self generateObject:subObject data:value[i]];
+[subObjects addObject:subObject];
+}
 
-    if ([data isKindOfClass:[NSData class]]) {
-        NSLog(@"%s \n generate Error", __func__);
-    }
+((void (*) (id, SEL, id))objc_msgSend)(object, sel, subObjects);
+} else if ([value isKindOfClass:[NSDictionary class]]) {
+NSString *className = [NSString stringWithFormat:@"WW%@Model", [self formatterMethodName:tempKey]];
+id subObject = [[NSClassFromString(className) alloc] init];
+[self generateObject:subObject data:value];
+((void (*) (id, SEL, id))objc_msgSend)(object, sel, subObject);
+
+} else {
+((void (*) (id, SEL, id))objc_msgSend)(object, sel, value);
+}
+}
+}
+
+if ([data isKindOfClass:[NSData class]]) {
+NSLog(@"%s \n generate Error", __func__);
+}
 }
 
 @end
