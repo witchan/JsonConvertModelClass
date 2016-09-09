@@ -1,11 +1,3 @@
-//
-//  NSObject+WWModel.h
-//  Coding
-//
-//  Created by WitChan on 16/8/30.
-//  Copyright © 2016年 WitChan.com. All rights reserved.
-//
-
 #import "NSObject+WWModel.h"
 #import <objc/runtime.h>
 #import <objc/message.h>

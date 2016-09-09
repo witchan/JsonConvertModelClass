@@ -14,8 +14,13 @@
 
 @interface ViewController ()
 @property (strong, nonatomic) NSArray   *systemKeywords;
+
+@property (weak) IBOutlet NSTextField   *rootClassNameTextField;
+@property (weak) IBOutlet NSTextField *classPrefixTextField;
+@property (weak) IBOutlet NSTextField *baseClassNameTextField;
+
 @property (weak) IBOutlet NSButton      *generateButton;
-@property (weak) IBOutlet NSTextField   *classNameTextField;
+
 @property (unsafe_unretained) IBOutlet  NSTextView *textView;
 
 /**
@@ -52,8 +57,18 @@
 #pragma mark - IBActions
 
 - (IBAction)generateButtonOnClicked:(NSButton *)sender {
+ 
+    if ([self.rootClassNameTextField.stringValue isEqualToString:@""]) {
+        self.rootClassNameTextField.stringValue = @"RootClass";
+    }
     
-    NSString *className = [@"WW" stringByAppendingString:[self.classNameTextField.stringValue capitalizedString]];
+    if ([self.classPrefixTextField.stringValue isEqualToString:@""]) {
+        self.classPrefixTextField.stringValue = @"WW";
+    }
+    
+    if ([self.baseClassNameTextField.stringValue isEqualToString:@""]) {
+        self.baseClassNameTextField.stringValue = @"NSObject";
+    }
     
     NSError *error;
     
@@ -72,18 +87,21 @@
     }
     
     if (data == nil || [NSJSONSerialization isValidJSONObject:data]) {
-        self.textView.string = @"json格式不正确";
+        self.textView.string = @"json format error";
         return;
     }
     
     NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
     
     if (jsonDictionary == nil || error) {
-        self.textView.string = @"json格式不正确";
+        self.textView.string = @"json format error";
         return;
     }
     
     // 生成class文件
+    NSString *className =  [NSString stringWithFormat:@"%@%@",
+                            self.classPrefixTextField.stringValue,
+                            self.rootClassNameTextField.stringValue];
     [self generateClassWithClassName:className data:jsonDictionary];
     [self inportModelFile];
     
@@ -103,15 +121,14 @@
     NSString *mFilePath = [[NSBundle mainBundle] pathForResource:@"MFile" ofType:@"wit"];
     NSMutableString *mFile = [NSMutableString stringWithContentsOfFile:mFilePath encoding:NSUTF8StringEncoding error:nil];
     
-    [hFile replaceOccurrencesOfString:@"@ClassName@" withString:className options:0 range:NSMakeRange(0, hFile.length)];
-    
     // 设置属性
     NSMutableString *properties = [NSMutableString string];
     
     NSString *property;
     
     if ([obj isKindOfClass:[NSArray class]]) {
-        NSString *name = [NSString stringWithFormat:@"WW%@Model", [className capitalizedString]];
+        
+        NSString *name = [NSString stringWithFormat:@"%@%@Model",self.classPrefixTextField.stringValue , [className capitalizedString]];
         [self generateClassWithClassName:className data:[obj firstObject]];
         [self importHaderFileToClassWithHFile:hFile inportString:[name stringByAppendingString:@".h"]];
         property = [NSString stringWithFormat:@"@property (strong, nonatomic) NSArray *arr_%@;\n", name];
@@ -134,7 +151,7 @@
                 
                 property = [NSString stringWithFormat:@"@property (strong, nonatomic) NSArray *arr_%@;\n", key];
             } else if ([value isKindOfClass:[NSDictionary class]]) {
-                NSString *name = [NSString stringWithFormat:@"WW%@Model", [key capitalizedString]];
+                NSString *name = [NSString stringWithFormat:@"%@%@Model",self.classPrefixTextField.stringValue ,[key capitalizedString]];
                 
                 [self generateClassWithClassName:name data:value];
                 [self importHaderFileToClassWithHFile:hFile inportString:[name stringByAppendingString:@".h"]];
@@ -151,9 +168,14 @@
         }
     }
     
-    [hFile replaceOccurrencesOfString:@"@property@" withString:properties options:0 range:NSMakeRange(0, hFile.length)];
+    NSString *baseClass = self.baseClassNameTextField.stringValue? : @"NSObject";
     
-    [mFile replaceOccurrencesOfString:@"@ClassName@" withString:className options:0 range:NSMakeRange(0, mFile.length)];
+    [hFile replaceOccurrencesOfString:@"#ClassName#" withString:className options:0 range:NSMakeRange(0, hFile.length)];
+    [hFile replaceOccurrencesOfString:@"#property#" withString:properties options:0 range:NSMakeRange(0, hFile.length)];
+    [hFile replaceOccurrencesOfString:@"#BaseClass#" withString:baseClass options:0 range:NSMakeRange(0, hFile.length)];
+    
+    [mFile replaceOccurrencesOfString:@"#ClassName#" withString:className options:0 range:NSMakeRange(0, mFile.length)];
+    [mFile replaceOccurrencesOfString:@"#BaseClass#" withString:baseClass options:0 range:NSMakeRange(0, mFile.length)];
     
     NSString *savePath = [[NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"Models/"];
     NSString *hSavePath = [NSString stringWithFormat:@"%@/%@.h", savePath, className];
@@ -169,7 +191,7 @@
 - (void)importHaderFileToClassWithHFile:(NSMutableString *)hFile inportString:(NSString *)text {
     NSString *importString = [NSString stringWithFormat:@"#import \"%@\"\n", text];
     
-    [hFile insertString:importString atIndex:63];
+    [hFile insertString:importString atIndex:87];
 }
 
 - (void)inportModelFile {
