@@ -128,7 +128,7 @@
     
     if ([obj isKindOfClass:[NSArray class]]) {
         
-        NSString *name = [NSString stringWithFormat:@"%@%@Model",self.classPrefixTextField.stringValue , [className capitalizedString]];
+        NSString *name = [NSString stringWithFormat:@"%@_%@",self.classPrefixTextField.stringValue , [className capitalizedString]];
         [self generateClassWithClassName:className data:[obj firstObject]];
         [self importHaderFileToClassWithHFile:hFile inportString:[name stringByAppendingString:@".h"]];
         property = [NSString stringWithFormat:@"@property (strong, nonatomic) NSArray *arr_%@;\n", name];
@@ -145,17 +145,17 @@
                 property = [NSString stringWithFormat:@"@property (copy, nonatomic) NSString *str_%@;\n", key];
             } else if ([value isKindOfClass:[NSArray class]]) {
                 
-                NSString *name = [NSString stringWithFormat:@"WW%@Model", [key capitalizedString]];
+                NSString *name = [NSString stringWithFormat:@"%@_%@",className , [key capitalizedString]];
                 [self generateClassWithClassName:name data:[value firstObject]];
                 [self importHaderFileToClassWithHFile:hFile inportString:[name stringByAppendingString:@".h"]];
                 
                 property = [NSString stringWithFormat:@"@property (strong, nonatomic) NSArray *arr_%@;\n", key];
             } else if ([value isKindOfClass:[NSDictionary class]]) {
-                NSString *name = [NSString stringWithFormat:@"%@%@Model",self.classPrefixTextField.stringValue ,[key capitalizedString]];
+                NSString *name = [NSString stringWithFormat:@"%@_%@",className , [key capitalizedString]];
                 
                 [self generateClassWithClassName:name data:value];
                 [self importHaderFileToClassWithHFile:hFile inportString:[name stringByAppendingString:@".h"]];
-                property = [NSString stringWithFormat:@"@property (strong, nonatomic) %@ *%@Model;\n", name, key];
+                property = [NSString stringWithFormat:@"@property (strong, nonatomic) %@ *%@;\n", name, key];
             } else if ([[value className] isEqualToString:@"__NSCFBoolean"]) {
                 property = [NSString stringWithFormat:@"@property (assign, nonatomic, getter=is%@) BOOL b_%@;\n", [[key copy] capitalizedString], key];
             } else if ([[value className] isEqualToString:@"__NSCFNumber"]) {
@@ -173,6 +173,9 @@
     [hFile replaceOccurrencesOfString:@"#ClassName#" withString:className options:0 range:NSMakeRange(0, hFile.length)];
     [hFile replaceOccurrencesOfString:@"#property#" withString:properties options:0 range:NSMakeRange(0, hFile.length)];
     [hFile replaceOccurrencesOfString:@"#BaseClass#" withString:baseClass options:0 range:NSMakeRange(0, hFile.length)];
+    if ([baseClass isEqualToString:@"NSObject"]) {
+        [hFile replaceOccurrencesOfString:@"\n#import \"NSObject.h\"" withString:@"" options:0 range:NSMakeRange(0, hFile.length)];
+    }
     
     [mFile replaceOccurrencesOfString:@"#ClassName#" withString:className options:0 range:NSMakeRange(0, mFile.length)];
     [mFile replaceOccurrencesOfString:@"#BaseClass#" withString:baseClass options:0 range:NSMakeRange(0, mFile.length)];

@@ -1,8 +1,35 @@
+//
+//  NSObject+WWModel.h
+//  Coding
+//
+//  Created by WitChan on 16/8/30.
+//  Copyright © 2016年 WitChan.com. All rights reserved.
+//
+
 #import <Foundation/Foundation.h>
+#import <objc/message.h>
+
+static inline void instanceMethod_replace (Class toClass, SEL originalSEL, SEL replacementSEL) {
+    IMP  replacementIMP = class_getMethodImplementation(toClass, replacementSEL);
+    Method replacementMethod = class_getInstanceMethod(toClass, replacementSEL);
+    class_replaceMethod(toClass, originalSEL, replacementIMP, method_getTypeEncoding(replacementMethod));
+}
+
+static inline void classMethod_exchange (Class toClass, SEL originalSEL, SEL replacementSEL) {
+    Method originalMethod = class_getClassMethod(toClass, originalSEL);
+    Method replacementMethod = class_getClassMethod(toClass, replacementSEL);
+    method_exchangeImplementations(originalMethod, replacementMethod);
+}
+
 
 @interface NSObject (WWModel)
 
 + (instancetype)modelWithDictionary:(NSDictionary *)dictionary;
 - (NSArray *)propertyList;
+- (instancetype)modelWithDictionary:(NSDictionary *)dictionary;
+
+- (void)archive;
++ (instancetype)unarchive;
++ (BOOL)removeArchive;
 
 @end
