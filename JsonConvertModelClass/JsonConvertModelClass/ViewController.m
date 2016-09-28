@@ -63,7 +63,7 @@
     }
     
     if ([self.classPrefixTextField.stringValue isEqualToString:@""]) {
-        self.classPrefixTextField.stringValue = @"WW";
+//        self.classPrefixTextField.stringValue = @"WW";
     }
     
     if ([self.baseClassNameTextField.stringValue isEqualToString:@""]) {
@@ -103,8 +103,6 @@
                             self.classPrefixTextField.stringValue,
                             self.rootClassNameTextField.stringValue];
     [self generateClassWithClassName:className data:jsonDictionary];
-    [self inportModelFile];
-    
     self.textView.string = @"转换成功！文件已保存到桌面的Models文件夹中.";
 }
 
@@ -128,10 +126,10 @@
     
     if ([obj isKindOfClass:[NSArray class]]) {
         
-        NSString *name = [NSString stringWithFormat:@"%@_%@",self.classPrefixTextField.stringValue , [className capitalizedString]];
+        NSString *name = [className capitalizedString];
         [self generateClassWithClassName:className data:[obj firstObject]];
         [self importHaderFileToClassWithHFile:hFile inportString:[name stringByAppendingString:@".h"]];
-        property = [NSString stringWithFormat:@"@property (strong, nonatomic) NSArray *arr_%@;\n", name];
+        property = [NSString stringWithFormat:@"@property (strong, nonatomic) NSArray *%@;\n", name];
         
         [properties appendString:property];
     }
@@ -142,26 +140,26 @@
             
             if ([value isKindOfClass:[NSString class]]) {
                 
-                property = [NSString stringWithFormat:@"@property (copy, nonatomic) NSString *str_%@;\n", key];
+                property = [NSString stringWithFormat:@"@property (copy, nonatomic) NSString *%@;\n", key];
             } else if ([value isKindOfClass:[NSArray class]]) {
                 
-                NSString *name = [NSString stringWithFormat:@"%@_%@",className , [key capitalizedString]];
+                NSString *name = [key capitalizedString];
                 [self generateClassWithClassName:name data:[value firstObject]];
                 [self importHaderFileToClassWithHFile:hFile inportString:[name stringByAppendingString:@".h"]];
                 
-                property = [NSString stringWithFormat:@"@property (strong, nonatomic) NSArray *arr_%@;\n", key];
+                property = [NSString stringWithFormat:@"@property (strong, nonatomic) NSArray *%@;\n", key];
             } else if ([value isKindOfClass:[NSDictionary class]]) {
-                NSString *name = [NSString stringWithFormat:@"%@_%@",className , [key capitalizedString]];
+                NSString *name = [key capitalizedString];
                 
                 [self generateClassWithClassName:name data:value];
                 [self importHaderFileToClassWithHFile:hFile inportString:[name stringByAppendingString:@".h"]];
                 property = [NSString stringWithFormat:@"@property (strong, nonatomic) %@ *%@;\n", name, key];
             } else if ([[value className] isEqualToString:@"__NSCFBoolean"]) {
-                property = [NSString stringWithFormat:@"@property (assign, nonatomic, getter=is%@) BOOL b_%@;\n", [[key copy] capitalizedString], key];
+                property = [NSString stringWithFormat:@"@property (assign, nonatomic, getter=is%@) BOOL %@;\n", [[key copy] capitalizedString], key];
             } else if ([[value className] isEqualToString:@"__NSCFNumber"]) {
-                property = [NSString stringWithFormat:@"@property (copy, nonatomic) NSNumber *n_%@;\n", key];
+                property = [NSString stringWithFormat:@"@property (copy, nonatomic) NSNumber *%@;\n", key];
             } else {
-                property = [NSString stringWithFormat:@"@property (strong, nonatomic) id id_%@;\n", key];
+                property = [NSString stringWithFormat:@"@property (strong, nonatomic) id %@;\n", key];
             }
             
             [properties appendString:property];
@@ -184,7 +182,6 @@
     NSString *hSavePath = [NSString stringWithFormat:@"%@/%@.h", savePath, className];
     NSString *mSavePath = [NSString stringWithFormat:@"%@/%@.m", savePath, className];
     
-    
     [[NSFileManager defaultManager] createDirectoryAtPath:savePath withIntermediateDirectories:NO attributes:nil error:nil];
 
     [hFile writeToFile:hSavePath atomically:NO encoding:NSUTF8StringEncoding error:nil];
@@ -194,22 +191,7 @@
 - (void)importHaderFileToClassWithHFile:(NSMutableString *)hFile inportString:(NSString *)text {
     NSString *importString = [NSString stringWithFormat:@"#import \"%@\"\n", text];
     
-    [hFile insertString:importString atIndex:87];
-}
-
-- (void)inportModelFile {
-    NSString *HWWModelPath  = [[NSBundle mainBundle] pathForResource:@"HWWModel" ofType:@"wit"];
-    NSString *MWWModelPath  = [[NSBundle mainBundle] pathForResource:@"MWWModel" ofType:@"wit"];
-    
-    NSString *HWWModel = [NSString stringWithContentsOfFile:HWWModelPath encoding:NSUTF8StringEncoding error:nil];
-    NSString *MWWModel = [NSString stringWithContentsOfFile:MWWModelPath encoding:NSUTF8StringEncoding error:nil];
-    
-    NSString *savePath = [[NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"Models/"];
-    NSString *hSavePath = [NSString stringWithFormat:@"%@/NSObject+WWModel.h", savePath];
-    NSString *mSavePath = [NSString stringWithFormat:@"%@/NSObject+WWModel.m", savePath];
-
-    [HWWModel writeToFile:hSavePath atomically:NO encoding:NSUTF8StringEncoding error:nil];
-    [MWWModel writeToFile:mSavePath atomically:NO encoding:NSUTF8StringEncoding error:nil];
+    [hFile insertString:importString atIndex:58];
 }
 
 @end

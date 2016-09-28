@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EB46161D1D75813000CDAFEC /* HWWModel.wit in Resources */ = {isa = PBXBuildFile; fileRef = EB46161B1D75813000CDAFEC /* HWWModel.wit */; };
-		EB46161E1D75813000CDAFEC /* MWWModel.wit in Resources */ = {isa = PBXBuildFile; fileRef = EB46161C1D75813000CDAFEC /* MWWModel.wit */; };
 		EBEA074D1D704BBB00E09701 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EBEA074C1D704BBB00E09701 /* AppDelegate.m */; };
 		EBEA07501D704BBB00E09701 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EBEA074F1D704BBB00E09701 /* main.m */; };
 		EBEA07531D704BBB00E09701 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBEA07521D704BBB00E09701 /* ViewController.m */; };
@@ -19,8 +17,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		EB46161B1D75813000CDAFEC /* HWWModel.wit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HWWModel.wit; sourceTree = "<group>"; };
-		EB46161C1D75813000CDAFEC /* MWWModel.wit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MWWModel.wit; sourceTree = "<group>"; };
 		EBEA07481D704BBB00E09701 /* JsonConvertModelClass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JsonConvertModelClass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBEA074B1D704BBB00E09701 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EBEA074C1D704BBB00E09701 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -81,8 +77,6 @@
 			children = (
 				EBEA075F1D704CA300E09701 /* HFile.wit */,
 				EBEA07601D704CA300E09701 /* MFile.wit */,
-				EB46161B1D75813000CDAFEC /* HWWModel.wit */,
-				EB46161C1D75813000CDAFEC /* MWWModel.wit */,
 				EBEA074F1D704BBB00E09701 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -147,10 +141,8 @@
 			files = (
 				EBEA07551D704BBB00E09701 /* Assets.xcassets in Resources */,
 				EBEA07631D704CA300E09701 /* HFile.wit in Resources */,
-				EB46161D1D75813000CDAFEC /* HWWModel.wit in Resources */,
 				EBEA07581D704BBB00E09701 /* Main.storyboard in Resources */,
 				EBEA07641D704CA300E09701 /* MFile.wit in Resources */,
-				EB46161E1D75813000CDAFEC /* MWWModel.wit in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

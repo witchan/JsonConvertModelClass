@@ -1,5 +1,4 @@
 #import <Foundation/Foundation.h>
-#import "NSObject+WWModel.h"
 #import "#BaseClass#.h"
 
 @interface #ClassName# : #BaseClass#
